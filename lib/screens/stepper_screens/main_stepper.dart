@@ -37,7 +37,7 @@ class _MainStepperState extends State<MainStepper> {
             SizedBox(
               height: 50,
             ),
-            ProfilePhotoStepper()
+            InterestStepper()
           ],
         ),
       ),

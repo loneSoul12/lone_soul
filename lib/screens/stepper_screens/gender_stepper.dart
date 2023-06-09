@@ -17,6 +17,9 @@ class GenderStepper extends StatelessWidget {
             style: AppStyles.boldHeader,
           ),
         ),
+        const SizedBox(
+          height: 50,
+        ),
         Center(
           child: InkWell(
             onTap: () {},
@@ -55,6 +58,27 @@ class GenderStepper extends StatelessWidget {
             ),
           ),
         )),
+        const SizedBox(
+          height: 10,
+        ),
+        Center(
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              height: 55,
+              width: 250,
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.darkGrey),
+                  borderRadius: BorderRadius.circular(30)),
+              child: Center(
+                child: Text(
+                  "Rabbit",
+                  style: AppStyles.text,
+                ),
+              ),
+            ),
+          ),
+        ),
         const SizedBox(
           height: 50,
         ),
