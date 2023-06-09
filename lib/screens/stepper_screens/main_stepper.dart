@@ -6,6 +6,7 @@ import 'package:lone_soul/screens/stepper_screens/gender_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/interest_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/location.dart';
 import 'package:lone_soul/screens/stepper_screens/name_stepper.dart';
+import 'package:lone_soul/screens/stepper_screens/profile_photo_stepper.dart';
 
 class MainStepper extends StatefulWidget {
   const MainStepper({super.key});
@@ -36,7 +37,7 @@ class _MainStepperState extends State<MainStepper> {
             SizedBox(
               height: 50,
             ),
-            InterestStepper()
+            ProfilePhotoStepper()
           ],
         ),
       ),

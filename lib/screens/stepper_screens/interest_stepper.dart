@@ -40,6 +40,7 @@ class InterestStepper extends StatelessWidget {
             selectedChipColor: AppColors.pink,
             selectedTextStyle: AppStyles.text.copyWith(color: Colors.white),
             items: interests.map((e) => MultiSelectItem<String>(e, e)).toList(),
+            //onTap: (item) {},
           ),
         ),
         const SizedBox(
