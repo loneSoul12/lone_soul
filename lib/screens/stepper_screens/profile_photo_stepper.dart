@@ -32,7 +32,7 @@ class ProfilePhotoStepper extends StatelessWidget {
                   radius: const Radius.circular(12),
                   padding: const EdgeInsets.all(6),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     child: Container(
                       height: 200,
                       width: 120,

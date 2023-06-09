@@ -20,11 +20,11 @@ class NameStepper extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
+          child: SizedBox(
             width: 150,
             child: TextFormField(
               cursorColor: AppColors.brown,
-              decoration: InputDecoration(hintText: 'John Cena'),
+              decoration: const InputDecoration(hintText: 'John Cena'),
             ),
           ),
         ),

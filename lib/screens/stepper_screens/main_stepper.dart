@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
-import 'package:lone_soul/app_styles.dart';
-import 'package:lone_soul/constants.dart';
 import 'package:lone_soul/screens/stepper_screens/age_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/gender_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/interest_stepper.dart';
@@ -32,11 +30,11 @@ class _MainStepperState extends State<MainStepper> {
           changeStepper();
         },
       ),
-      AgeStepper(),
-      GenderStepper(),
-      LocationStepper(),
-      InterestStepper(),
-      ProfilePhotoStepper()
+      const AgeStepper(),
+      const GenderStepper(),
+      const LocationStepper(),
+      const InterestStepper(),
+      const ProfilePhotoStepper()
     ];
     return Scaffold(
       body: Container(

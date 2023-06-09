@@ -19,11 +19,11 @@ class LocationStepper extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
+          child: SizedBox(
             width: 150,
             child: TextFormField(
               cursorColor: AppColors.brown,
-              decoration: InputDecoration(hintText: 'Buea'),
+              decoration: const InputDecoration(hintText: 'Buea'),
             ),
           ),
         ),

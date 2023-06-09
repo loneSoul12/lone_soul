@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/constants.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:simple_tags/simple_tags.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
@@ -31,10 +30,10 @@ class InterestStepper extends StatelessWidget {
           height: 30,
         ),
         Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: MultiSelectChipField(
-            title: Text('interests'),
-            decoration: BoxDecoration(color: Colors.white),
+            title: const Text('interests'),
+            decoration: const BoxDecoration(color: Colors.white),
             showHeader: false,
             scrollBar: HorizontalScrollBar(isAlwaysShown: true),
             selectedChipColor: AppColors.pink,

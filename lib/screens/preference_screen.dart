@@ -22,7 +22,7 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
       appBar: AppBar(
         toolbarHeight: 60,
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 226, 224, 224),
+        backgroundColor: const Color.fromARGB(255, 226, 224, 224),
         title: Text(
           "Preference Settings",
           style: AppStyles.boldHeader.copyWith(fontSize: 20),
@@ -131,8 +131,8 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
                       style: AppStyles.text,
                     ),
                     MultiSelectChipField(
-                      title: Text('interests'),
-                      decoration: BoxDecoration(color: Colors.white),
+                      title: const Text('interests'),
+                      decoration: const BoxDecoration(color: Colors.white),
                       showHeader: false,
                       scrollBar: HorizontalScrollBar(isAlwaysShown: true),
                       selectedChipColor: AppColors.pink,
@@ -151,7 +151,7 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
         ),
         Expanded(
             child: Container(
-          color: Color.fromARGB(255, 226, 224, 224),
+          color: const Color.fromARGB(255, 226, 224, 224),
         ))
       ]),
     );

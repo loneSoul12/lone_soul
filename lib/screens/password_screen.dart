@@ -40,7 +40,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 style: AppStyles.boldHeader,
               ),
               Text(
-                "Don\'t forget your password",
+                "Don't forget your password",
                 style: AppStyles.text.copyWith(color: AppColors.grey),
               ),
               const SizedBox(

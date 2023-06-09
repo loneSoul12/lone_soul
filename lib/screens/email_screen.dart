@@ -48,7 +48,7 @@ class _EmailScreenState extends State<EmailScreen> {
               ),
               TextFormField(
                 cursorColor: AppColors.brown,
-                decoration: InputDecoration(hintText: 'janroyal@gmail.com'),
+                decoration: const InputDecoration(hintText: 'janroyal@gmail.com'),
               ),
               const SizedBox(height: 50),
               Center(
