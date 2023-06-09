@@ -1,6 +1,6 @@
 # lone_soul
 
-A new Flutter project.
+Lone soul is a matchmaking software designed to connect individuals based on their interests and preferences.
 
 ## Getting Started
 
