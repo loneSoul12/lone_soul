@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/screens/auth_start_screen.dart';
+import 'package:lone_soul/screens/email_screen.dart';
+import 'package:lone_soul/screens/policy.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +16,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        inputDecorationTheme: const InputDecorationTheme(
+          focusColor: AppColors.brown,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.brown),
+          ),
+        ),
         primarySwatch: Colors.blue,
       ),
-      home: AuthStartScreen(),
+      home: Policy(),
     );
   }
 }

@@ -10,4 +10,9 @@ class AppColors {
       begin: FractionalOffset(0.0, 0.0),
       end: FractionalOffset(0.0, 1.0),
       tileMode: TileMode.clamp);
+  static const buttonGradient = LinearGradient(
+      colors: [brown, pink],
+      begin: FractionalOffset(0.0, 0.0),
+      end: FractionalOffset(1.0, 0.0),
+      tileMode: TileMode.clamp);
 }
