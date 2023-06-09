@@ -49,7 +49,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
               TextFormField(
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
-                  hintText: 'Set your password',
+                  hintText: 'Set your password here',
                   hintStyle: AppStyles.text
                       .copyWith(color: AppColors.grey, fontSize: 15),
                 ),

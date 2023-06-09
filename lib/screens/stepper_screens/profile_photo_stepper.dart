@@ -50,7 +50,56 @@ class ProfilePhotoStepper extends StatelessWidget {
             left: MediaQuery.of(context).size.width * 0.587,
             top: MediaQuery.of(context).size.height * 0.247,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    isDismissible: true,
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        height: 100,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.camera,
+                                      color: AppColors.brown,
+                                      size: 30,
+                                    )),
+                                Text(
+                                  "Camera",
+                                  style: AppStyles.text,
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.picture_in_picture,
+                                      color: AppColors.brown,
+                                      size: 30,
+                                    )),
+                                Text(
+                                  "Gallery",
+                                  style: AppStyles.text,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    });
+              },
               child: Container(
                 height: 50,
                 width: 50,
@@ -65,7 +114,24 @@ class ProfilePhotoStepper extends StatelessWidget {
               ),
             ),
           )
-        ])
+        ]),
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          height: 55,
+          width: 250,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              gradient: AppColors.buttonGradient,
+              borderRadius: BorderRadius.circular(30)),
+          child: Center(
+            child: Text(
+              "Continue",
+              style: AppStyles.text.copyWith(color: Colors.white),
+            ),
+          ),
+        ),
       ],
     );
   }
