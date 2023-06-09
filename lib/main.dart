@@ -4,6 +4,7 @@ import 'package:lone_soul/screens/auth_start_screen.dart';
 import 'package:lone_soul/screens/email_screen.dart';
 import 'package:lone_soul/screens/policy.dart';
 import 'package:lone_soul/screens/preference_screen.dart';
+import 'package:lone_soul/screens/signin_screen.dart';
 import 'package:lone_soul/screens/stepper_screens/main_stepper.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: PreferenceScreen(),
+      home: SigninScreen(),
     );
   }
 }

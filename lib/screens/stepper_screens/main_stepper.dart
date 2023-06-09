@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/constants.dart';
 import 'package:lone_soul/screens/stepper_screens/age_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/gender_stepper.dart';
 import 'package:lone_soul/screens/stepper_screens/interest_stepper.dart';
@@ -16,8 +17,27 @@ class MainStepper extends StatefulWidget {
 }
 
 class _MainStepperState extends State<MainStepper> {
+  int value = 1;
+
+  void changeStepper() {
+    value++;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> stepperScreens = [
+      NameStepper(
+        changeStepper: () {
+          changeStepper();
+        },
+      ),
+      AgeStepper(),
+      GenderStepper(),
+      LocationStepper(),
+      InterestStepper(),
+      ProfilePhotoStepper()
+    ];
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -25,19 +45,19 @@ class _MainStepperState extends State<MainStepper> {
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 35,
             ),
             LinearProgressIndicator(
-              value: 0.1,
+              value: (value / 6),
               backgroundColor: AppColors.grey,
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.pink),
+              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.pink),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            InterestStepper()
+            stepperScreens[value - 1],
           ],
         ),
       ),

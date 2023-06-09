@@ -18,7 +18,7 @@ class _EmailScreenState extends State<EmailScreen> {
         elevation: 0,
         leading: IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: AppColors.darkGrey,
             )),
@@ -32,7 +32,7 @@ class _EmailScreenState extends State<EmailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(

@@ -3,7 +3,8 @@ import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
 class NameStepper extends StatelessWidget {
-  const NameStepper({super.key});
+  const NameStepper({super.key, this.changeStepper});
+  final Function? changeStepper;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,9 @@ class NameStepper extends StatelessWidget {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            changeStepper!();
+          },
           child: Container(
             height: 55,
             width: 250,

@@ -17,14 +17,14 @@ class ProfilePhotoStepper extends StatelessWidget {
             style: AppStyles.boldHeader,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Stack(children: [
           Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 DottedBorder(
@@ -40,7 +40,7 @@ class ProfilePhotoStepper extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 )
               ],
@@ -58,7 +58,7 @@ class ProfilePhotoStepper extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   gradient: AppColors.buttonGradient,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
