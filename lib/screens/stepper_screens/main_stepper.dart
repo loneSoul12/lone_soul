@@ -57,7 +57,7 @@ class _MainStepperState extends State<MainStepper> {
             const SizedBox(
               height: 50,
             ),
-            stepperScreens[value - 1],
+            ProfilePhotoStepper(),
           ],
         ),
       ),
