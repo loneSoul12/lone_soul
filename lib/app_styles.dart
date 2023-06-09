@@ -4,14 +4,14 @@ import 'package:lone_soul/app_colors.dart';
 class AppStyles {
   static TextStyle boldHeader = const TextStyle(
     fontFamily: 'DmSans',
-    fontSize: 30,
+    fontSize: 35,
     color: AppColors.darkGrey,
     fontWeight: FontWeight.w700,
   );
 
   static TextStyle text = const TextStyle(
     fontFamily: 'DmSans',
-    fontSize: 15,
+    fontSize: 16,
     color: AppColors.darkGrey,
     fontWeight: FontWeight.w700,
   );
