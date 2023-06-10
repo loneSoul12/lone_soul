@@ -34,7 +34,7 @@ class _NameStepperState extends State<NameStepper> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
+          child: SizedBox(
             width: 150,
             child: TextFormField(
               key: nameKey,
@@ -49,7 +49,7 @@ class _NameStepperState extends State<NameStepper> {
               focusNode: nameCreateAccountFocus,
               controller: nameCreateAccountField,
               cursorColor: AppColors.brown,
-              decoration: InputDecoration(hintText: 'John Cena'),
+              decoration: const InputDecoration(hintText: 'John Cena'),
             ),
           ),
         ),

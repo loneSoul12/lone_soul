@@ -68,6 +68,7 @@ class _EmailScreenState extends State<EmailScreen> {
                 focusNode: emailCreateAccountFocus,
                 autofocus: true,
                 cursorColor: AppColors.brown,
+
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (input) {
                   if (input!.isEmpty) {
@@ -81,6 +82,7 @@ class _EmailScreenState extends State<EmailScreen> {
                 },
                 decoration:
                     const InputDecoration(hintText: 'janroyal@gmail.com'),
+
               ),
               const SizedBox(height: 50),
               Center(

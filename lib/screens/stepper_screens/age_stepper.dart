@@ -34,7 +34,7 @@ class _AgeStepperState extends State<AgeStepper> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
+          child: SizedBox(
             width: 80,
             child: TextFormField(
               key: ageKey,
@@ -52,7 +52,7 @@ class _AgeStepperState extends State<AgeStepper> {
                 }
               },
               cursorColor: AppColors.brown,
-              decoration: InputDecoration(hintText: '23'),
+              decoration: const InputDecoration(hintText: '23'),
             ),
           ),
         ),

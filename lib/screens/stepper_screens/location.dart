@@ -41,7 +41,7 @@ class _LocationStepperState extends State<LocationStepper> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Container(
+          child: SizedBox(
             width: 150,
             child: TextFormField(
               key: locationKey,
@@ -54,7 +54,7 @@ class _LocationStepperState extends State<LocationStepper> {
               controller: locationCreateAccountField,
               focusNode: locationCreateAccountFocus,
               cursorColor: AppColors.brown,
-              decoration: InputDecoration(hintText: 'Buea'),
+              decoration: const InputDecoration(hintText: 'Buea'),
             ),
           ),
         ),

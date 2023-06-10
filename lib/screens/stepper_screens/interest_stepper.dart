@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lone_soul/constants.dart';
 import 'package:lone_soul/models/interests.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:simple_tags/simple_tags.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
@@ -40,6 +39,7 @@ class _InterestStepperState extends State<InterestStepper> {
         ),
         Container(
           decoration: const BoxDecoration(),
+
           child: MultiSelectChipDisplay(
             colorator: (p0) {
               if (p0.isSelected!) {
