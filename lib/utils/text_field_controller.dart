@@ -13,3 +13,11 @@ FocusNode? nameCreateAccountFocus;
 FocusNode? passwordCreateAccountFocus;
 FocusNode? ageCreateAccountFocus;
 FocusNode? locationCreateAccountFocus;
+
+//sign in controllers
+TextEditingController? emailSignField;
+TextEditingController? passwordSignField;
+
+//sign in focus
+FocusNode? emailSignFocus;
+FocusNode? passwordSignFocus;
