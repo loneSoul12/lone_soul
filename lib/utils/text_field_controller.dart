@@ -21,3 +21,6 @@ TextEditingController? passwordSignField;
 //sign in focus
 FocusNode? emailSignFocus;
 FocusNode? passwordSignFocus;
+
+//global key
+final signInGlobalKey = GlobalKey<FormState>();

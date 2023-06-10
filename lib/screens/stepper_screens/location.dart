@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
-import 'package:lone_soul/text_field_controller.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
 class LocationStepper extends StatefulWidget {
   const LocationStepper({super.key, this.changeStepper});

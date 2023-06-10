@@ -56,8 +56,10 @@ class _SigninScreenState extends State<SigninScreen> {
               child: TextFormField(
                 controller: emailSignField,
                 focusNode: emailSignFocus,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 onFieldSubmitted: (_) {
-                  FocusNode().requestFocus(passwordSignFocus);
+                  //FocusScope.of(context).unfocus();
+                  FocusScope.of(context).requestFocus(passwordSignFocus);
                 },
                 validator: (input) {
                   if (input!.isEmpty) {
@@ -87,11 +89,12 @@ class _SigninScreenState extends State<SigninScreen> {
               child: TextFormField(
                 controller: passwordSignField,
                 focusNode: passwordSignFocus,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 onFieldSubmitted: (_) {
                   FocusNode().unfocus();
                 },
                 validator: (input) {
-                  if (input == null) {
+                  if (input!.isEmpty) {
                     return 'Please Enter your password';
                   }
                 },
@@ -136,6 +139,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: isLoading
                         ? const CircularProgressIndicator(
                             color: Colors.white,
+                            strokeWidth: 2.0,
                           )
                         : Text(
                             "Sign In",
