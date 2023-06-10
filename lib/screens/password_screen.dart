@@ -11,6 +11,7 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
+  final passwordKey = GlobalKey<FormFieldState>();
   @override
   void initState() {
     passwordCreateAccountField = TextEditingController();
@@ -62,8 +63,14 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 height: 20,
               ),
               TextFormField(
+                key: passwordKey,
                 controller: passwordCreateAccountField,
                 focusNode: passwordCreateAccountFocus,
+                validator: (input) {
+                  if (input!.isEmpty) {
+                    return 'Please set a your pasword';
+                  }
+                },
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
                   hintText: 'Set your password here',
@@ -74,7 +81,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
               const SizedBox(height: 50),
               Center(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (passwordKey.currentState!.validate()) {
+                      //next screen NameStepperScreen
+                    }
+                  },
                   child: Container(
                     height: 55,
                     width: 250,

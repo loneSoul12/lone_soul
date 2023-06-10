@@ -32,10 +32,24 @@ class _MainStepperState extends State<MainStepper> {
           changeStepper();
         },
       ),
-      AgeStepper(),
-      GenderStepper(),
-      LocationStepper(),
-      InterestStepper(),
+      AgeStepper(changeStepper: () {
+        changeStepper();
+      }),
+      GenderStepper(
+        changeStepper: () {
+          changeStepper();
+        },
+      ),
+      LocationStepper(
+        changeStepper: () {
+          changeStepper();
+        },
+      ),
+      InterestStepper(
+        changeStepper: () {
+          changeStepper();
+        },
+      ),
       ProfilePhotoStepper()
     ];
     return Scaffold(
@@ -57,7 +71,7 @@ class _MainStepperState extends State<MainStepper> {
             const SizedBox(
               height: 50,
             ),
-            ProfilePhotoStepper(),
+            stepperScreens[value - 1],
           ],
         ),
       ),

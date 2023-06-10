@@ -15,6 +15,7 @@ class ProfilePhotoStepper extends StatefulWidget {
 }
 
 class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
+  bool isLoading = false;
   XFile? photo;
   final imagePicker = PickImage();
   @override
@@ -111,7 +112,7 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
                                       setState(() {});
                                     },
                                     icon: const Icon(
-                                      Icons.picture_in_picture,
+                                      Icons.photo,
                                       color: AppColors.brown,
                                       size: 30,
                                     )),
@@ -144,17 +145,74 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
         const SizedBox(
           height: 20,
         ),
-        Container(
-          height: 55,
-          width: 250,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white),
-              gradient: AppColors.buttonGradient,
-              borderRadius: BorderRadius.circular(30)),
-          child: Center(
-            child: Text(
-              "Continue",
-              style: AppStyles.text.copyWith(color: Colors.white),
+        InkWell(
+          onTap: () {
+            if (photo == null) {
+              showDialog(
+                  barrierDismissible: true,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      actions: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: AppColors.pink,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Center(
+                              child: Text(
+                                "ok",
+                                style: AppStyles.text
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                      content: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Please set your profile photo",
+                            style: AppStyles.text.copyWith(color: Colors.red),
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            } else {
+              //create account and navigate to preference screen
+              isLoading = true;
+              setState(() {});
+            }
+          },
+          child: Container(
+            height: 55,
+            width: 250,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                gradient: AppColors.buttonGradient,
+                borderRadius: BorderRadius.circular(30)),
+            child: Center(
+              child: Text(
+                "Continue",
+                style: AppStyles.text.copyWith(color: Colors.white),
+              ),
             ),
           ),
         ),

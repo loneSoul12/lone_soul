@@ -3,7 +3,8 @@ import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
 class GenderStepper extends StatefulWidget {
-  const GenderStepper({super.key});
+  const GenderStepper({super.key, this.changeStepper});
+  final Function? changeStepper;
 
   @override
   State<GenderStepper> createState() => _GenderStepperState();
@@ -87,7 +88,9 @@ class _GenderStepperState extends State<GenderStepper> {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            widget.changeStepper!();
+          },
           child: Container(
             height: 55,
             width: 250,

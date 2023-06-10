@@ -12,11 +12,19 @@ class LocationStepper extends StatefulWidget {
 }
 
 class _LocationStepperState extends State<LocationStepper> {
+  final locationKey = GlobalKey<FormFieldState>();
   @override
   void initState() {
     locationCreateAccountField = TextEditingController();
     locationCreateAccountFocus = FocusNode();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    locationCreateAccountField!.dispose();
+    locationCreateAccountFocus!.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,7 +44,13 @@ class _LocationStepperState extends State<LocationStepper> {
           child: Container(
             width: 150,
             child: TextFormField(
+              key: locationKey,
               autofocus: true,
+              validator: (input) {
+                if (input!.isEmpty) {
+                  return 'Please enter your location';
+                }
+              },
               controller: locationCreateAccountField,
               focusNode: locationCreateAccountFocus,
               cursorColor: AppColors.brown,
@@ -56,7 +70,11 @@ class _LocationStepperState extends State<LocationStepper> {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            if (locationKey.currentState!.validate()) {
+              widget.changeStepper!();
+            }
+          },
           child: Container(
             height: 55,
             width: 250,

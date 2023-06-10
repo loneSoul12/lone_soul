@@ -12,6 +12,7 @@ class NameStepper extends StatefulWidget {
 }
 
 class _NameStepperState extends State<NameStepper> {
+  final nameKey = GlobalKey<FormFieldState>();
   @override
   void initState() {
     nameCreateAccountField = TextEditingController();
@@ -36,6 +37,15 @@ class _NameStepperState extends State<NameStepper> {
           child: Container(
             width: 150,
             child: TextFormField(
+              key: nameKey,
+              validator: (input) {
+                if (input!.isEmpty) {
+                  return 'please Enter your name';
+                }
+                if (input.length < 3) {
+                  return "Your name should be at least 3 character long";
+                }
+              },
               focusNode: nameCreateAccountFocus,
               controller: nameCreateAccountField,
               cursorColor: AppColors.brown,
@@ -56,7 +66,9 @@ class _NameStepperState extends State<NameStepper> {
         Center(
             child: InkWell(
           onTap: () {
-            widget.changeStepper!();
+            if (nameKey.currentState!.validate()) {
+              widget.changeStepper!();
+            }
           },
           child: Container(
             height: 55,
