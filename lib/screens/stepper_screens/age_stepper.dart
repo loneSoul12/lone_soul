@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
-class AgeStepper extends StatelessWidget {
-  const AgeStepper({super.key});
+class AgeStepper extends StatefulWidget {
+  const AgeStepper({super.key, this.changeStepper});
+  final Function? changeStepper;
+
+  @override
+  State<AgeStepper> createState() => _AgeStepperState();
+}
+
+class _AgeStepperState extends State<AgeStepper> {
+  final ageKey = GlobalKey<FormFieldState>();
+  @override
+  void initState() {
+    ageCreateAccountField = TextEditingController();
+    ageCreateAccountFocus = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +37,20 @@ class AgeStepper extends StatelessWidget {
           child: SizedBox(
             width: 80,
             child: TextFormField(
+              key: ageKey,
               keyboardType: TextInputType.number,
+              controller: ageCreateAccountField,
+              focusNode: ageCreateAccountFocus,
+              autofocus: true,
+              validator: (input) {
+                if (input!.isEmpty) {
+                  return "Please enter your age";
+                }
+
+                if (int.tryParse(input)! < 18) {
+                  return "You must be at least 18 years old";
+                }
+              },
               cursorColor: AppColors.brown,
               decoration: const InputDecoration(hintText: '23'),
             ),
@@ -40,7 +68,12 @@ class AgeStepper extends StatelessWidget {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            if (ageKey.currentState!.validate()) {
+              //next screen gender
+              widget.changeStepper!();
+            }
+          },
           child: Container(
             height: 55,
             width: 250,

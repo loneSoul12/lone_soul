@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
-class NameStepper extends StatelessWidget {
+class NameStepper extends StatefulWidget {
   const NameStepper({super.key, this.changeStepper});
   final Function? changeStepper;
+
+  @override
+  State<NameStepper> createState() => _NameStepperState();
+}
+
+class _NameStepperState extends State<NameStepper> {
+  final nameKey = GlobalKey<FormFieldState>();
+  @override
+  void initState() {
+    nameCreateAccountField = TextEditingController();
+    nameCreateAccountFocus = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +37,17 @@ class NameStepper extends StatelessWidget {
           child: SizedBox(
             width: 150,
             child: TextFormField(
+              key: nameKey,
+              validator: (input) {
+                if (input!.isEmpty) {
+                  return 'please Enter your name';
+                }
+                if (input.length < 3) {
+                  return "Your name should be at least 3 character long";
+                }
+              },
+              focusNode: nameCreateAccountFocus,
+              controller: nameCreateAccountField,
               cursorColor: AppColors.brown,
               decoration: const InputDecoration(hintText: 'John Cena'),
             ),
@@ -41,7 +66,9 @@ class NameStepper extends StatelessWidget {
         Center(
             child: InkWell(
           onTap: () {
-            changeStepper!();
+            if (nameKey.currentState!.validate()) {
+              widget.changeStepper!();
+            }
           },
           child: Container(
             height: 55,

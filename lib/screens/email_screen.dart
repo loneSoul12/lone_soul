@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -10,6 +11,21 @@ class EmailScreen extends StatefulWidget {
 }
 
 class _EmailScreenState extends State<EmailScreen> {
+  final emailkey = GlobalKey<FormFieldState>();
+  @override
+  void initState() {
+    emailCreateAccountField = TextEditingController();
+    emailCreateAccountFocus = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailCreateAccountField!.dispose();
+    emailCreateAccountFocus!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +63,35 @@ class _EmailScreenState extends State<EmailScreen> {
                 height: 20,
               ),
               TextFormField(
+                key: emailkey,
+                controller: emailCreateAccountField,
+                focusNode: emailCreateAccountFocus,
+                autofocus: true,
                 cursorColor: AppColors.brown,
-                decoration: const InputDecoration(hintText: 'janroyal@gmail.com'),
+
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (input) {
+                  if (input!.isEmpty) {
+                    return 'Please enter an email';
+                  }
+                  if (!RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(input)) {
+                    return "please enter a valid email";
+                  }
+                },
+                decoration:
+                    const InputDecoration(hintText: 'janroyal@gmail.com'),
+
               ),
               const SizedBox(height: 50),
               Center(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (emailkey.currentState!.validate()) {
+                      //NextScreen password screen.
+                    }
+                  },
                   child: Container(
                     height: 55,
                     width: 250,

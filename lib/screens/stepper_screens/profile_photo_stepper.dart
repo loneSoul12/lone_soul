@@ -1,11 +1,23 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/pick_image.dart';
 
-class ProfilePhotoStepper extends StatelessWidget {
+class ProfilePhotoStepper extends StatefulWidget {
   const ProfilePhotoStepper({super.key});
 
+  @override
+  State<ProfilePhotoStepper> createState() => _ProfilePhotoStepperState();
+}
+
+class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
+  bool isLoading = false;
+  XFile? photo;
+  final imagePicker = PickImage();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,10 +46,15 @@ class ProfilePhotoStepper extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                     child: Container(
-                      height: 200,
-                      width: 120,
-                      color: AppColors.grey,
-                    ),
+                        height: 200,
+                        width: 120,
+                        color: AppColors.grey,
+                        child: photo != null
+                            ? Image.file(
+                                File(photo!.path),
+                                fit: BoxFit.cover,
+                              )
+                            : const SizedBox()),
                   ),
                 ),
                 const SizedBox(
@@ -68,7 +85,12 @@ class ProfilePhotoStepper extends StatelessWidget {
                             Column(
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      photo = await imagePicker
+                                          .pickImageFromCamera();
+                                      setState(() {});
+                                    },
                                     icon: const Icon(
                                       Icons.camera,
                                       color: AppColors.brown,
@@ -83,9 +105,14 @@ class ProfilePhotoStepper extends StatelessWidget {
                             Column(
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      photo = await imagePicker
+                                          .pickImageFromGallery();
+                                      setState(() {});
+                                    },
                                     icon: const Icon(
-                                      Icons.picture_in_picture,
+                                      Icons.photo,
                                       color: AppColors.brown,
                                       size: 30,
                                     )),
@@ -118,17 +145,74 @@ class ProfilePhotoStepper extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Container(
-          height: 55,
-          width: 250,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white),
-              gradient: AppColors.buttonGradient,
-              borderRadius: BorderRadius.circular(30)),
-          child: Center(
-            child: Text(
-              "Continue",
-              style: AppStyles.text.copyWith(color: Colors.white),
+        InkWell(
+          onTap: () {
+            if (photo == null) {
+              showDialog(
+                  barrierDismissible: true,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      actions: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: AppColors.pink,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Center(
+                              child: Text(
+                                "ok",
+                                style: AppStyles.text
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                      content: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Please set your profile photo",
+                            style: AppStyles.text.copyWith(color: Colors.red),
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            } else {
+              //create account and navigate to preference screen
+              isLoading = true;
+              setState(() {});
+            }
+          },
+          child: Container(
+            height: 55,
+            width: 250,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                gradient: AppColors.buttonGradient,
+                borderRadius: BorderRadius.circular(30)),
+            child: Center(
+              child: Text(
+                "Continue",
+                style: AppStyles.text.copyWith(color: Colors.white),
+              ),
             ),
           ),
         ),

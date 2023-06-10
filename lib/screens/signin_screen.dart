@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -10,10 +11,31 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    emailSignField = TextEditingController();
+    passwordSignField = TextEditingController();
+    passwordSignFocus = FocusNode();
+    emailSignFocus = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailSignField!.dispose();
+    passwordSignField!.dispose();
+    emailSignFocus!.dispose();
+    passwordSignFocus!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: signInGlobalKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,6 +54,23 @@ class _SigninScreenState extends State<SigninScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
               child: TextFormField(
+                controller: emailSignField,
+                focusNode: emailSignFocus,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onFieldSubmitted: (_) {
+                  //FocusScope.of(context).unfocus();
+                  FocusScope.of(context).requestFocus(passwordSignFocus);
+                },
+                validator: (input) {
+                  if (input!.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  if (!RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(input)) {
+                    return 'Please enter a correct email';
+                  }
+                },
                 keyboardType: TextInputType.emailAddress,
                 autofocus: true,
                 cursorColor: AppColors.brown,
@@ -48,6 +87,17 @@ class _SigninScreenState extends State<SigninScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
               child: TextFormField(
+                controller: passwordSignField,
+                focusNode: passwordSignFocus,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onFieldSubmitted: (_) {
+                  FocusNode().unfocus();
+                },
+                validator: (input) {
+                  if (input!.isEmpty) {
+                    return 'Please Enter your password';
+                  }
+                },
                 obscureText: true,
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
@@ -69,7 +119,15 @@ class _SigninScreenState extends State<SigninScreen> {
             ),
             Center(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  if (signInGlobalKey.currentState!.validate()) {
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    //sign in
+                  }
+                },
                 child: Container(
                   height: 55,
                   width: 250,
@@ -78,10 +136,15 @@ class _SigninScreenState extends State<SigninScreen> {
                       gradient: AppColors.buttonGradient,
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
-                    child: Text(
-                      "Sign In",
-                      style: AppStyles.text.copyWith(color: Colors.white),
-                    ),
+                    child: isLoading
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2.0,
+                          )
+                        : Text(
+                            "Sign In",
+                            style: AppStyles.text.copyWith(color: Colors.white),
+                          ),
                   ),
                 ),
               ),

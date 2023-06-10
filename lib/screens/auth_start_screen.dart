@@ -36,7 +36,9 @@ class AuthStartScreen extends StatelessWidget {
                       height: 20,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        //NextScreen emailScreen
+                      },
                       child: Container(
                         height: 55,
                         width: 250,
@@ -55,7 +57,9 @@ class AuthStartScreen extends StatelessWidget {
                       height: 10,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        //next screen sign in screen
+                      },
                       child: Container(
                         height: 55,
                         width: 250,

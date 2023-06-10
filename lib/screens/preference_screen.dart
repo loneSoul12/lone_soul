@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 import 'package:lone_soul/constants.dart';
+import 'package:lone_soul/models/interests.dart';
 import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multi_select_flutter/util/horizontal_scrollbar.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -130,16 +132,17 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
                       "Interests",
                       style: AppStyles.text,
                     ),
-                    MultiSelectChipField(
-                      title: const Text('interests'),
-                      decoration: const BoxDecoration(color: Colors.white),
-                      showHeader: false,
+
+                    MultiSelectChipDisplay(
+                      //title: Text('interests'),
+                      decoration: BoxDecoration(color: Colors.white),
+                      // showHeader: false,
+
                       scrollBar: HorizontalScrollBar(isAlwaysShown: true),
-                      selectedChipColor: AppColors.pink,
-                      selectedTextStyle:
-                          AppStyles.text.copyWith(color: Colors.white),
-                      items: interests
-                          .map((e) => MultiSelectItem<String>(e, e))
+                      scroll: true,
+                      items: interestList
+                          .map((e) =>
+                              MultiSelectItem<Interest>(e, e.interestName!))
                           .toList(),
                       //onTap: (item) {},
                     ),

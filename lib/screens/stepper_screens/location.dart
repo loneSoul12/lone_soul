@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/text_field_controller.dart';
 
-class LocationStepper extends StatelessWidget {
-  const LocationStepper({super.key});
+class LocationStepper extends StatefulWidget {
+  const LocationStepper({super.key, this.changeStepper});
+  final Function? changeStepper;
+
+  @override
+  State<LocationStepper> createState() => _LocationStepperState();
+}
+
+class _LocationStepperState extends State<LocationStepper> {
+  final locationKey = GlobalKey<FormFieldState>();
+  @override
+  void initState() {
+    locationCreateAccountField = TextEditingController();
+    locationCreateAccountFocus = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    locationCreateAccountField!.dispose();
+    locationCreateAccountFocus!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +44,15 @@ class LocationStepper extends StatelessWidget {
           child: SizedBox(
             width: 150,
             child: TextFormField(
+              key: locationKey,
+              autofocus: true,
+              validator: (input) {
+                if (input!.isEmpty) {
+                  return 'Please enter your location';
+                }
+              },
+              controller: locationCreateAccountField,
+              focusNode: locationCreateAccountFocus,
               cursorColor: AppColors.brown,
               decoration: const InputDecoration(hintText: 'Buea'),
             ),
@@ -39,7 +70,11 @@ class LocationStepper extends StatelessWidget {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            if (locationKey.currentState!.validate()) {
+              widget.changeStepper!();
+            }
+          },
           child: Container(
             height: 55,
             width: 250,
