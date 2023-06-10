@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/text_field_controller.dart';
 
-class AgeStepper extends StatelessWidget {
+class AgeStepper extends StatefulWidget {
   const AgeStepper({super.key});
+
+  @override
+  State<AgeStepper> createState() => _AgeStepperState();
+}
+
+class _AgeStepperState extends State<AgeStepper> {
+  @override
+  void initState() {
+    ageCreateAccountField = TextEditingController();
+    ageCreateAccountFocus = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +36,9 @@ class AgeStepper extends StatelessWidget {
             width: 80,
             child: TextFormField(
               keyboardType: TextInputType.number,
+              controller: ageCreateAccountField,
+              focusNode: ageCreateAccountFocus,
+              autofocus: true,
               cursorColor: AppColors.brown,
               decoration: InputDecoration(hintText: '23'),
             ),

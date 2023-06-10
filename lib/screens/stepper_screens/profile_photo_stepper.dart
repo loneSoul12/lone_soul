@@ -1,11 +1,22 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/utils/pick_image.dart';
 
-class ProfilePhotoStepper extends StatelessWidget {
+class ProfilePhotoStepper extends StatefulWidget {
   const ProfilePhotoStepper({super.key});
 
+  @override
+  State<ProfilePhotoStepper> createState() => _ProfilePhotoStepperState();
+}
+
+class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
+  XFile? photo;
+  final imagePicker = PickImage();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,10 +45,15 @@ class ProfilePhotoStepper extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                     child: Container(
-                      height: 200,
-                      width: 120,
-                      color: AppColors.grey,
-                    ),
+                        height: 200,
+                        width: 120,
+                        color: AppColors.grey,
+                        child: photo != null
+                            ? Image.file(
+                                File(photo!.path),
+                                fit: BoxFit.cover,
+                              )
+                            : const SizedBox()),
                   ),
                 ),
                 const SizedBox(
@@ -68,7 +84,12 @@ class ProfilePhotoStepper extends StatelessWidget {
                             Column(
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      photo = await imagePicker
+                                          .pickImageFromCamera();
+                                      setState(() {});
+                                    },
                                     icon: const Icon(
                                       Icons.camera,
                                       color: AppColors.brown,
@@ -83,7 +104,12 @@ class ProfilePhotoStepper extends StatelessWidget {
                             Column(
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      photo = await imagePicker
+                                          .pickImageFromGallery();
+                                      setState(() {});
+                                    },
                                     icon: const Icon(
                                       Icons.picture_in_picture,
                                       color: AppColors.brown,

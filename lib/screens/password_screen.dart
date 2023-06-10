@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/text_field_controller.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -10,6 +11,20 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
+  @override
+  void initState() {
+    passwordCreateAccountField = TextEditingController();
+    passwordCreateAccountFocus = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    passwordCreateAccountField!.dispose();
+    passwordCreateAccountFocus!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +62,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 height: 20,
               ),
               TextFormField(
+                controller: passwordCreateAccountField,
+                focusNode: passwordCreateAccountFocus,
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
                   hintText: 'Set your password here',

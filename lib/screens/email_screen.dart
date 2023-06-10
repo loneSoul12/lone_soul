@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/text_field_controller.dart';
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -10,6 +11,13 @@ class EmailScreen extends StatefulWidget {
 }
 
 class _EmailScreenState extends State<EmailScreen> {
+  @override
+  void initState() {
+    emailCreateAccountField = TextEditingController();
+    emailCreateAccountFocus = FocusNode();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +55,9 @@ class _EmailScreenState extends State<EmailScreen> {
                 height: 20,
               ),
               TextFormField(
+                controller: emailCreateAccountField,
+                focusNode: emailCreateAccountFocus,
+                autofocus: true,
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(hintText: 'janroyal@gmail.com'),
               ),

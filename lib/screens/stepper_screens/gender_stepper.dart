@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
-class GenderStepper extends StatelessWidget {
+class GenderStepper extends StatefulWidget {
   const GenderStepper({super.key});
 
+  @override
+  State<GenderStepper> createState() => _GenderStepperState();
+}
+
+class _GenderStepperState extends State<GenderStepper> {
+  String gender = 'man';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,17 +28,26 @@ class GenderStepper extends StatelessWidget {
         ),
         Center(
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              gender = 'man';
+              setState(() {});
+            },
             child: Container(
               height: 55,
               width: 250,
               decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.darkGrey),
+                  border: Border.all(
+                      color: gender == 'man'
+                          ? AppColors.pink
+                          : AppColors.darkGrey),
                   borderRadius: BorderRadius.circular(30)),
               child: Center(
                 child: Text(
                   "Man",
-                  style: AppStyles.text,
+                  style: AppStyles.text.copyWith(
+                      color: gender == 'man'
+                          ? AppColors.pink
+                          : AppColors.darkGrey),
                 ),
               ),
             ),
@@ -43,44 +58,32 @@ class GenderStepper extends StatelessWidget {
         ),
         Center(
             child: InkWell(
-          onTap: () {},
+          onTap: () {
+            gender = 'woman';
+            setState(() {});
+          },
           child: Container(
             height: 55,
             width: 250,
             decoration: BoxDecoration(
-                border: Border.all(color: AppColors.pink),
+                border: Border.all(
+                    color: gender == 'woman'
+                        ? AppColors.pink
+                        : AppColors.darkGrey),
                 borderRadius: BorderRadius.circular(30)),
             child: Center(
               child: Text(
                 "Woman",
-                style: AppStyles.text.copyWith(color: AppColors.pink),
+                style: AppStyles.text.copyWith(
+                    color: gender == 'woman'
+                        ? AppColors.pink
+                        : AppColors.darkGrey),
               ),
             ),
           ),
         )),
         const SizedBox(
-          height: 10,
-        ),
-        Center(
-          child: InkWell(
-            onTap: () {},
-            child: Container(
-              height: 55,
-              width: 250,
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.darkGrey),
-                  borderRadius: BorderRadius.circular(30)),
-              child: Center(
-                child: Text(
-                  "Rabbit",
-                  style: AppStyles.text,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 50,
+          height: 100,
         ),
         Center(
             child: InkWell(

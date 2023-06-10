@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/text_field_controller.dart';
 
-class LocationStepper extends StatelessWidget {
-  const LocationStepper({super.key});
+class LocationStepper extends StatefulWidget {
+  const LocationStepper({super.key, this.changeStepper});
+  final Function? changeStepper;
+
+  @override
+  State<LocationStepper> createState() => _LocationStepperState();
+}
+
+class _LocationStepperState extends State<LocationStepper> {
+  @override
+  void initState() {
+    locationCreateAccountField = TextEditingController();
+    locationCreateAccountFocus = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +36,9 @@ class LocationStepper extends StatelessWidget {
           child: Container(
             width: 150,
             child: TextFormField(
+              autofocus: true,
+              controller: locationCreateAccountField,
+              focusNode: locationCreateAccountFocus,
               cursorColor: AppColors.brown,
               decoration: InputDecoration(hintText: 'Buea'),
             ),
