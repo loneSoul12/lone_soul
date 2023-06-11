@@ -20,7 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Preference? preference;
 
   List<Widget> getPages() => [
-        HomeScreenPortion(preference: preference),
+        HomeScreenPortion(
+          preference: preference,
+          key: ValueKey(preference),
+        ),
         const MessagesScreen(),
       ];
 
