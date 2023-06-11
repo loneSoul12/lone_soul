@@ -1,16 +1,19 @@
 import 'package:lone_soul/models/interests.dart';
+import 'package:lone_soul/models/preference.dart';
 
 class AppUser {
-  AppUser(
-      {this.userId,
-      this.age,
-      this.email,
-      this.gender = 'man',
-      this.imageUrl,
-      this.interests,
-      this.location,
-      this.password,
-      this.username});
+  AppUser({
+    this.userId,
+    this.age,
+    this.email,
+    this.gender = 'man',
+    this.imageUrl,
+    this.interests,
+    this.location,
+    this.password,
+    this.username,
+  });
+
   String? userId;
   String? username;
   String? email;
@@ -18,8 +21,9 @@ class AppUser {
   String? gender;
   String? location;
   int? age;
-  final String? imageUrl;
+  String? imageUrl;
   List<Interest>? interests;
+  Preference? preference;
 
   Map<String, dynamic> userToJson(AppUser user) {
     return {
@@ -34,14 +38,13 @@ class AppUser {
 
   factory AppUser.fromJson(Map<String, dynamic> user) {
     return AppUser(
-      userId: user[''],
-      username: user[''],
-      email: user[''],
-      gender: user[''],
-      location: user[''],
-      age: user[''],
-      imageUrl: user[''],
-      interests: user[''],
+      userId: user['id'],
+      username: user['username'],
+      email: user['email'],
+      gender: user['gender'],
+      location: user['location'],
+      age: user['age'],
+      imageUrl: user['profile_picture'],
     );
   }
   @override

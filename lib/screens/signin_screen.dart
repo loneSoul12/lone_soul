@@ -14,6 +14,7 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
   bool isLoading = false;
+  bool obscureText = true;
 
   @override
   void initState() {
@@ -117,7 +118,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     return 'Please Enter your password';
                   }
                 },
-                obscureText: true,
+                obscureText: obscureText,
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
                     hintText: 'Enter your password',
@@ -126,9 +127,13 @@ class _SigninScreenState extends State<SigninScreen> {
                     label: const Text("Password"),
                     labelStyle: AppStyles.text.copyWith(color: AppColors.brown),
                     suffix: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.visibility_off,
+                        onPressed: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        icon: Icon(
+                          obscureText ? Icons.visibility_off : Icons.visibility,
                           color: AppColors.grey,
                         ))),
               ),
@@ -143,6 +148,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     setState(() {
                       isLoading = true;
                     });
+                    final navigator = Navigator.of(context);
 
                     //sign in
                     final sev = UserAuthentication();

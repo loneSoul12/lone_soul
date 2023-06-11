@@ -3,6 +3,7 @@ import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 import 'package:lone_soul/constants.dart';
 import 'package:lone_soul/models/interests.dart';
+import 'package:lone_soul/models/preference.dart';
 import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multi_select_flutter/util/horizontal_scrollbar.dart';
@@ -16,8 +17,18 @@ class PreferenceScreen extends StatefulWidget {
 }
 
 class _PreferenceScreenState extends State<PreferenceScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    interestList.forEach((element) {
+      element.isSelected = false;
+    });
+  }
+
   String genderPreference = 'Men';
   double startval1 = 20, endval1 = 70;
+  final interests = <Interest>[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +43,16 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
         centerTitle: true,
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop(
+                Preference(
+                  minAge: startval1.toInt(),
+                  maxAge: endval1.toInt(),
+                  gender: genderPreference.toLowerCase(),
+                  interests: interests,
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(top: 18.0),
               child: Text(
@@ -48,7 +68,7 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
       ),
       body: Column(children: [
         Container(
-          height: 300,
+          // height: 300,
           width: double.infinity,
           color: Colors.white,
           child: Padding(
@@ -132,19 +152,36 @@ class _PreferenceScreenState extends State<PreferenceScreen> {
                       "Interests",
                       style: AppStyles.text,
                     ),
-
-                    MultiSelectChipDisplay(
-                      //title: Text('interests'),
-                      decoration: BoxDecoration(color: Colors.white),
-                      // showHeader: false,
-
-                      scrollBar: HorizontalScrollBar(isAlwaysShown: true),
-                      scroll: true,
-                      items: interestList
-                          .map((e) =>
-                              MultiSelectItem<Interest>(e, e.interestName!))
-                          .toList(),
-                      //onTap: (item) {},
+                    Container(
+                      decoration: const BoxDecoration(),
+                      child: MultiSelectChipDisplay(
+                        colorator: (p0) {
+                          if (p0.isSelected!) {
+                            return AppColors.pink;
+                          } else {
+                            return Color.fromARGB(255, 160, 148, 148);
+                          }
+                        },
+                        textStyle: AppStyles.text.copyWith(color: Colors.white),
+                        items: interestList
+                            .map((e) =>
+                                MultiSelectItem<Interest>(e, e.interestName!))
+                            .toList(),
+                        onTap: (item) {
+                          if (item.isSelected!) {
+                            setState(() {
+                              item.isSelected = false;
+                              interests.remove(item);
+                            });
+                          } else {
+                            setState(() {
+                              item.isSelected = true;
+                              interests.add(item);
+                            });
+                          }
+                        },
+                        //onSaved: ,
+                      ),
                     ),
                   ],
                 )

@@ -27,6 +27,7 @@ dependencies:
   simple_gradient_text: ^1.2.4
   supabase_flutter: ^1.6.2
   image_picker: ^0.8.8
+  appinio_swiper: ^2.0.1
 
 dev_dependencies:
   flutter_test:
