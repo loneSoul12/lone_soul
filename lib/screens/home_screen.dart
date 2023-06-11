@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/global_user.dart';
 import 'package:lone_soul/models/preference.dart';
 import 'package:lone_soul/screens/home_screen_portion.dart';
 import 'package:lone_soul/screens/messages_screen.dart';
 import 'package:lone_soul/screens/preference_screen.dart';
+import 'package:lone_soul/services/db/user_db_methods.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +29,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         const MessagesScreen(),
       ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (globalUser == null) {
+      init();
+    }
+  }
+
+  void init() async {
+    globalUser = await UserDBMethods()
+        .getUser(Supabase.instance.client.auth.currentUser?.id ?? '');
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: getPages()[_currentIndex],
+      body: globalUser == null
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.pink,
+              ),
+            )
+          : getPages()[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {

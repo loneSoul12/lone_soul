@@ -12,7 +12,7 @@ class AuthStateManager extends StatelessWidget {
     return StreamBuilder(
         stream: Supabase.instance.client.auth.onAuthStateChange,
         builder: (context, snapshot) {
-          if (snapshot.hasData && globalUser != null) {
+          if (snapshot.hasData) {
             return const HomeScreen();
           } else {
             return const AuthStartScreen();

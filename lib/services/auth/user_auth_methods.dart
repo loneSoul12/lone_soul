@@ -30,7 +30,7 @@ class UserAuthentication {
     );
 
     final userId = response.user?.id;
-    
+
     if (userId == null) {
       return null;
     }
@@ -39,6 +39,7 @@ class UserAuthentication {
 
   Future<void> signOut() async {
     await supabaseInstance.client.auth.signOut();
+    globalUser = null;
     return;
   }
 }
