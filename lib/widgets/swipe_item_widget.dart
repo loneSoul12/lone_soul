@@ -108,22 +108,22 @@ class SwipeItemWidget extends StatelessWidget {
                         child: const Icon(Icons.close, color: Colors.redAccent),
                       ),
                     ),
-                    InkWell(
-                      onTap: onInfo,
-                      child: Container(
-                        height: 65,
-                        width: 65,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(65),
-                          border: Border.all(color: Colors.grey),
-                        ),
-                        child: const Icon(
-                          Icons.info,
-                          color: Colors.grey,
-                          size: 40,
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: onInfo,
+                    //   child: Container(
+                    //     height: 65,
+                    //     width: 65,
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(65),
+                    //       border: Border.all(color: Colors.grey),
+                    //     ),
+                    //     child: const Icon(
+                    //       Icons.info,
+                    //       color: Colors.grey,
+                    //       size: 40,
+                    //     ),
+                    //   ),
+                    // ),
                     InkWell(
                       onTap: onConnect,
                       child: Container(
