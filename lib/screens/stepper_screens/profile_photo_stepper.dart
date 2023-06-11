@@ -216,7 +216,7 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
                 borderRadius: BorderRadius.circular(30)),
             child: Center(
               child: isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 2.0,
                     )
