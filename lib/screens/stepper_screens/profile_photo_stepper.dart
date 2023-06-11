@@ -6,8 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/screens/preference_screen.dart';
 import 'package:lone_soul/services/db/user_db_methods.dart';
 import 'package:lone_soul/utils/pick_image.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfilePhotoStepper extends StatefulWidget {
   const ProfilePhotoStepper({super.key, this.user});
@@ -203,8 +205,10 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
               //create account and navigate to preference screen
               print(widget.user.toString());
               isLoading = true;
-              await db.insertUser(widget.user!, photo!);
               setState(() {});
+              await db.insertUser(widget.user!, photo!);
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => PreferenceScreen()));
             }
           },
           child: Container(

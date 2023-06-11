@@ -36,7 +36,14 @@ class _EmailScreenState extends State<EmailScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              Navigator.of(context).pop();
+            },
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: AppColors.darkGrey,
@@ -86,8 +93,10 @@ class _EmailScreenState extends State<EmailScreen> {
                     return "please enter a valid email";
                   }
                 },
-                decoration:
-                    const InputDecoration(hintText: 'janroyal@gmail.com'),
+                decoration: InputDecoration(
+                    hintStyle: AppStyles.text
+                        .copyWith(fontSize: 12, color: AppColors.grey),
+                    hintText: 'e.g: janroyal@gmail.com'),
               ),
               const SizedBox(height: 50),
               Center(

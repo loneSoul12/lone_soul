@@ -48,4 +48,5 @@ Lone soul is designed to be user-friendly and intuitive. Here are the use cases 
 
 - Flutter/Dart
 -  PostgreSQL
+-  Supabase
 

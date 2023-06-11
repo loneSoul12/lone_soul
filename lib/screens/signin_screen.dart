@@ -37,6 +37,23 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColors.darkGrey,
+            )),
+      ),
       body: Form(
         key: signInGlobalKey,
         child: Column(
@@ -134,22 +151,12 @@ class _SigninScreenState extends State<SigninScreen> {
                     final navigator = Navigator.of(context);
 
                     //sign in
-                    final user =
-                        await UserAuthentication().signInWithEmailAndPassword(
-                      emailSignField!.text,
-                      passwordSignField!.text,
-                    );
-
-                    setState(() {
-                      isLoading = false;
-                    });
-                    if (user != null) {
-                      navigator
-                        ..popUntil((route) => false)
-                        ..push(MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
-                    }
+                    final sev = UserAuthentication();
+                    await sev.signInWithEmailAndPassword(
+                        emailSignField!.text, passwordSignField!.text);
                   }
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen()));
                 },
                 child: Container(
                   height: 55,

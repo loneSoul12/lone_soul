@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
@@ -5,6 +7,7 @@ import 'package:lone_soul/models/user.dart';
 import 'package:lone_soul/screens/stepper_screens/main_stepper.dart';
 import 'package:lone_soul/services/auth/user_auth_methods.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key, this.user});
@@ -17,11 +20,13 @@ class PasswordScreen extends StatefulWidget {
 class _PasswordScreenState extends State<PasswordScreen> {
   final passwordKey = GlobalKey<FormFieldState>();
   final auth = UserAuthentication();
+  // late final StreamSubscription<AuthState> _authStateSubscription;
   bool isLoading = false;
   @override
   void initState() {
     passwordCreateAccountField = TextEditingController();
     passwordCreateAccountFocus = FocusNode();
+
     super.initState();
   }
 
@@ -39,7 +44,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               color: AppColors.darkGrey,
@@ -100,10 +107,14 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       final id =
                           await auth.signUpEmailAndPassword(widget.user!);
                       widget.user!.userId = id;
-                      //print("I am logged in\n\n");
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              MainStepper(user: widget.user)));
+                      print(
+                          "{${auth.supabaseInstance.client.auth.currentSession}\n\n");
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return MainStepper(
+                          user: widget.user,
+                        );
+                      }));
                     }
                   },
                   child: Container(

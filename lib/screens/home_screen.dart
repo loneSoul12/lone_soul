@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Preference? preference;
 
-  List<Widget> get pages => [
+  List<Widget> getPages() => [
         HomeScreenPortion(preference: preference),
         const MessagesScreen(),
       ];
@@ -43,16 +43,22 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context)
+            onPressed: () async {
+              final result = await Navigator.of(context)
                   .push(MaterialPageRoute(builder: (c) => PreferenceScreen()));
+
+              if (result is Preference) {
+                setState(() {
+                  preference = result;
+                });
+              }
             },
             icon: const Icon(Icons.search, size: 30),
             color: AppColors.darkGrey,
           ),
         ],
       ),
-      body: pages[_currentIndex],
+      body: getPages()[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {

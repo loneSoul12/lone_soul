@@ -7,6 +7,7 @@ class Preference {
     this.id,
     this.maxAge,
     this.minAge,
+    this.interests,
   });
 
   final String? id;
