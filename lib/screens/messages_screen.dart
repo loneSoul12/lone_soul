@@ -122,7 +122,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 child: SizedBox(
                   height: 200,
                   child: Row(
-                    children: List.generate(5, (index) {
+                    children: List.generate(matches!.length, (index) {
                       return MatchMessageItemWidget(
                         user: matches![index],
                         onTap: () {
@@ -155,7 +155,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 ),
               )
             else if (conversations!.isEmpty)
-              const Text('No Conversations available')
+              const Center(child: Text('No Conversations available'))
             else
               ...List.generate(5, (index) {
                 return MessageItemWidget(
