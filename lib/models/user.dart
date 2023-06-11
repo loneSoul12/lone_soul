@@ -1,24 +1,29 @@
+import 'package:lone_soul/models/interests.dart';
+import 'package:lone_soul/models/preference.dart';
+
 class AppUser {
-  const AppUser({
+  AppUser({
     this.userId,
     this.age,
     this.email,
-    this.gender,
+    this.gender = 'man',
     this.imageUrl,
     this.interests,
     this.location,
     this.password,
     this.username,
   });
-  final String? userId;
-  final String? username;
-  final String? email;
-  final String? password;
-  final String? gender;
-  final String? location;
-  final int? age;
+
+  String? userId;
+  String? username;
+  String? email;
+  String? password;
+  String? gender;
+  String? location;
+  int? age;
   final String? imageUrl;
-  final List<String>? interests;
+  List<Interest>? interests;
+  Preference? preference;
 
   Map<String, dynamic> userToJson(AppUser user) {
     return {
@@ -28,20 +33,23 @@ class AppUser {
       'gender': user.gender,
       'location': user.location,
       'age': user.age,
-      'imageUrl': user.imageUrl
     };
   }
 
   factory AppUser.fromJson(Map<String, dynamic> user) {
     return AppUser(
-      userId: user[''],
-      username: user[''],
-      email: user[''],
-      gender: user[''],
-      location: user[''],
-      age: user[''],
-      imageUrl: user[''],
-      interests: user[''],
+      userId: user['id'],
+      username: user['username'],
+      email: user['email'],
+      gender: user['gender'],
+      location: user['location'],
+      age: user['age'],
+      imageUrl: user['profile_picture'],
     );
+  }
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '${userId},';
   }
 }

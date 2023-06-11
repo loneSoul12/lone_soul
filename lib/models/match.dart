@@ -1,43 +1,27 @@
-class Match {
-    Match({
-    required this.userId,
-    required this.age,
-    this.gender,
-    this.imageUrl,
-    this.location,
-    required this.username,
+import 'package:lone_soul/models/user.dart';
+
+class MatchUser {
+  MatchUser({
+    this.id,
     this.matchScore = 0,
+    this.match,
   });
 
-  final int userId;
-  final String username;
-  final String? gender;
-  final String? location;
-  final int age;
-  final String? imageUrl;
+  final String? id;
+  AppUser? match;
   final double matchScore;
-  List<String> interests = [];
 
-  Map<String, dynamic> userToJson(Match user) {
+  Map<String, dynamic> userToJson(MatchUser user) {
     return {
-      'id': user.userId,
-      'username': user.username,
-      'gender': user.gender,
-      'location': user.location,
-      'age': user.age,
-      'imageUrl': user.imageUrl
+      'id': user.id,
     };
   }
 
-  factory Match.fromJson(Map<String, dynamic> user) {
-    return Match(
-      userId: user['id'],
-      username: user['username'],
-      gender: user['gender'],
-      location: user['location'],
-      age: user['age'],
-      imageUrl: user['profile_picture'],
-      matchScore: user['match_score']
+  factory MatchUser.fromJson(Map<String, dynamic> match) {
+    return MatchUser(
+      matchScore: match['match_score'],
+      match: AppUser.fromJson(match),
+      id: match['id'],
     );
   }
 }

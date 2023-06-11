@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class NameStepper extends StatefulWidget {
-  const NameStepper({super.key, this.changeStepper});
+  const NameStepper({super.key, this.changeStepper, this.user});
   final Function? changeStepper;
+  final AppUser? user;
 
   @override
   State<NameStepper> createState() => _NameStepperState();
@@ -38,6 +40,10 @@ class _NameStepperState extends State<NameStepper> {
             width: 150,
             child: TextFormField(
               key: nameKey,
+              onChanged: (val) {
+                widget.user?.username = val;
+                setState(() {});
+              },
               validator: (input) {
                 if (input!.isEmpty) {
                   return 'please Enter your name';

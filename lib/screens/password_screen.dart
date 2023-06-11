@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/screens/stepper_screens/main_stepper.dart';
+import 'package:lone_soul/services/auth/user_auth_methods.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({super.key});
+  const PasswordScreen({super.key, this.user});
+  final AppUser? user;
 
   @override
   State<PasswordScreen> createState() => _PasswordScreenState();
@@ -12,6 +16,8 @@ class PasswordScreen extends StatefulWidget {
 
 class _PasswordScreenState extends State<PasswordScreen> {
   final passwordKey = GlobalKey<FormFieldState>();
+  final auth = UserAuthentication();
+  bool isLoading = false;
   @override
   void initState() {
     passwordCreateAccountField = TextEditingController();
@@ -64,6 +70,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
               ),
               TextFormField(
                 key: passwordKey,
+                onChanged: (value) {
+                  widget.user?.password = value;
+                  setState(() {});
+                },
                 controller: passwordCreateAccountField,
                 focusNode: passwordCreateAccountFocus,
                 validator: (input) {
@@ -81,9 +91,19 @@ class _PasswordScreenState extends State<PasswordScreen> {
               const SizedBox(height: 50),
               Center(
                 child: InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if (passwordKey.currentState!.validate()) {
                       //next screen NameStepperScreen
+                      setState(() {
+                        isLoading = true;
+                      });
+                      final id =
+                          await auth.signUpEmailAndPassword(widget.user!);
+                      widget.user!.userId = id;
+                      //print("I am logged in\n\n");
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              MainStepper(user: widget.user)));
                     }
                   },
                   child: Container(
@@ -94,10 +114,16 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         gradient: AppColors.buttonGradient,
                         borderRadius: BorderRadius.circular(30)),
                     child: Center(
-                      child: Text(
-                        "Continue",
-                        style: AppStyles.text.copyWith(color: Colors.white),
-                      ),
+                      child: isLoading
+                          ? const CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Continue",
+                              style:
+                                  AppStyles.text.copyWith(color: Colors.white),
+                            ),
                     ),
                   ),
                 ),

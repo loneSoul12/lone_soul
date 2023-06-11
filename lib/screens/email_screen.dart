@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/screens/password_screen.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class EmailScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class EmailScreen extends StatefulWidget {
 
 class _EmailScreenState extends State<EmailScreen> {
   final emailkey = GlobalKey<FormFieldState>();
+  var user = AppUser();
   @override
   void initState() {
     emailCreateAccountField = TextEditingController();
@@ -64,11 +67,14 @@ class _EmailScreenState extends State<EmailScreen> {
               ),
               TextFormField(
                 key: emailkey,
+                onChanged: (value) {
+                  user.email = value;
+                  setState(() {});
+                },
                 controller: emailCreateAccountField,
                 focusNode: emailCreateAccountFocus,
                 autofocus: true,
                 cursorColor: AppColors.brown,
-
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (input) {
                   if (input!.isEmpty) {
@@ -82,7 +88,6 @@ class _EmailScreenState extends State<EmailScreen> {
                 },
                 decoration:
                     const InputDecoration(hintText: 'janroyal@gmail.com'),
-
               ),
               const SizedBox(height: 50),
               Center(
@@ -90,6 +95,8 @@ class _EmailScreenState extends State<EmailScreen> {
                   onTap: () {
                     if (emailkey.currentState!.validate()) {
                       //NextScreen password screen.
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => PasswordScreen(user: user)));
                     }
                   },
                   child: Container(

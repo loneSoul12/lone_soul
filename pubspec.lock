@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.3"
+  appinio_swiper:
+    dependency: "direct main"
+    description:
+      name: appinio_swiper
+      sha256: "4a8652eadd10e4cb6e62ddd062b3b0c65f3966c9e2704fba96f868316ebf5416"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   async:
     dependency: transitive
     description:
