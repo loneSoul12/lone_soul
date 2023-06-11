@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/constants.dart';
 import 'package:lone_soul/models/interests.dart';
+import 'package:lone_soul/models/user.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 
 class InterestStepper extends StatefulWidget {
-  const InterestStepper({super.key, this.changeStepper});
+  const InterestStepper({super.key, this.changeStepper, this.user});
   final Function? changeStepper;
+  final AppUser? user;
 
   @override
   State<InterestStepper> createState() => _InterestStepperState();
@@ -39,7 +41,6 @@ class _InterestStepperState extends State<InterestStepper> {
         ),
         Container(
           decoration: const BoxDecoration(),
-
           child: MultiSelectChipDisplay(
             colorator: (p0) {
               if (p0.isSelected!) {
@@ -54,13 +55,17 @@ class _InterestStepperState extends State<InterestStepper> {
                 .toList(),
             onTap: (item) {
               if (item.isSelected!) {
-                item.isSelected = false;
-                selectedInterest.remove(item);
-                setState(() {});
+                setState(() {
+                  item.isSelected = false;
+                  selectedInterest.remove(item);
+                  widget.user?.interests = selectedInterest;
+                });
               } else {
-                item.isSelected = true;
-                selectedInterest.add(item);
-                setState(() {});
+                setState(() {
+                  item.isSelected = true;
+                  selectedInterest.add(item);
+                  widget.user?.interests = selectedInterest;
+                });
               }
             },
             //onSaved: ,

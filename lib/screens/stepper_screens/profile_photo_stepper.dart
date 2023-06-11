@@ -5,16 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/services/db/user_db_methods.dart';
 import 'package:lone_soul/utils/pick_image.dart';
 
 class ProfilePhotoStepper extends StatefulWidget {
-  const ProfilePhotoStepper({super.key});
+  const ProfilePhotoStepper({super.key, this.user});
+  final AppUser? user;
 
   @override
   State<ProfilePhotoStepper> createState() => _ProfilePhotoStepperState();
 }
 
 class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
+  final db = UserDBMethods();
   bool isLoading = false;
   XFile? photo;
   final imagePicker = PickImage();
@@ -146,7 +150,7 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
           height: 20,
         ),
         InkWell(
-          onTap: () {
+          onTap: () async {
             if (photo == null) {
               showDialog(
                   barrierDismissible: true,
@@ -197,7 +201,9 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
                   });
             } else {
               //create account and navigate to preference screen
+              print(widget.user.toString());
               isLoading = true;
+              await db.insertUser(widget.user!, photo!);
               setState(() {});
             }
           },
@@ -209,10 +215,15 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
                 gradient: AppColors.buttonGradient,
                 borderRadius: BorderRadius.circular(30)),
             child: Center(
-              child: Text(
-                "Continue",
-                style: AppStyles.text.copyWith(color: Colors.white),
-              ),
+              child: isLoading
+                  ? CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2.0,
+                    )
+                  : Text(
+                      "Continue",
+                      style: AppStyles.text.copyWith(color: Colors.white),
+                    ),
             ),
           ),
         ),

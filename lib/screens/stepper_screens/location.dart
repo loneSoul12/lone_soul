@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class LocationStepper extends StatefulWidget {
-  const LocationStepper({super.key, this.changeStepper});
+  const LocationStepper({super.key, this.changeStepper, this.user});
   final Function? changeStepper;
+  final AppUser? user;
 
   @override
   State<LocationStepper> createState() => _LocationStepperState();
@@ -45,6 +47,10 @@ class _LocationStepperState extends State<LocationStepper> {
             width: 150,
             child: TextFormField(
               key: locationKey,
+              onChanged: (value) {
+                widget.user?.location = value;
+                setState(() {});
+              },
               autofocus: true,
               validator: (input) {
                 if (input!.isEmpty) {

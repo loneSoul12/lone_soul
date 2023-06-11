@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
 
 class GenderStepper extends StatefulWidget {
-  const GenderStepper({super.key, this.changeStepper});
+  const GenderStepper({super.key, this.changeStepper, this.user});
   final Function? changeStepper;
+  final AppUser? user;
 
   @override
   State<GenderStepper> createState() => _GenderStepperState();
@@ -30,8 +32,10 @@ class _GenderStepperState extends State<GenderStepper> {
         Center(
           child: InkWell(
             onTap: () {
-              gender = 'man';
-              setState(() {});
+              setState(() {
+                gender = 'man';
+                widget.user?.gender = gender;
+              });
             },
             child: Container(
               height: 55,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class AgeStepper extends StatefulWidget {
-  const AgeStepper({super.key, this.changeStepper});
+  const AgeStepper({super.key, this.changeStepper, this.user});
   final Function? changeStepper;
+  final AppUser? user;
 
   @override
   State<AgeStepper> createState() => _AgeStepperState();
@@ -38,6 +40,10 @@ class _AgeStepperState extends State<AgeStepper> {
             width: 80,
             child: TextFormField(
               key: ageKey,
+              onChanged: (value) {
+                widget.user?.age = int.parse(value);
+                setState(() {});
+              },
               keyboardType: TextInputType.number,
               controller: ageCreateAccountField,
               focusNode: ageCreateAccountFocus,

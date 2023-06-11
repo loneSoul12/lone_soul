@@ -8,10 +8,12 @@ class UserDBMethods {
 
   //insert users to database
   Future<void> insertUser(AppUser appUser, XFile image) async {
-    final userData = appUser.userToJson(appUser);
+    var userData = appUser.userToJson(appUser);
     try {
       final imageUrl = await uploadImage(image);
+      userData.addAll({'profile_picture': imageUrl});
       await supabaseInstance.client.from('users').insert(userData);
+      await insertUserInterests(appUser.interests!, appUser.userId!);
     } on PostgrestException catch (e) {
       print(e);
       return;
