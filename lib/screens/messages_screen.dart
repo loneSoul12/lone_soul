@@ -5,6 +5,7 @@ import 'package:lone_soul/global_user.dart';
 import 'package:lone_soul/models/match.dart';
 import 'package:lone_soul/models/preference.dart';
 import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/screens/swipe_screen.dart';
 import 'package:lone_soul/services/db/conversation_db_methods.dart';
 import 'package:lone_soul/services/db/match_db_methods.dart';
 import 'package:lone_soul/widgets/match_message_item_widget.dart';
@@ -124,7 +125,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     children: List.generate(5, (index) {
                       return MatchMessageItemWidget(
                         user: matches![index],
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (c) =>
+                                  SwipeScreen(users: matches!.sublist(index))));
+                        },
                       );
                     }),
                   ),
@@ -149,7 +154,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   color: AppColors.pink,
                 ),
               )
-            else if (conversations!.length == 0)
+            else if (conversations!.isEmpty)
               const Text('No Conversations available')
             else
               ...List.generate(5, (index) {
