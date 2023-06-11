@@ -4,6 +4,7 @@ import 'package:lone_soul/app_styles.dart';
 import 'package:lone_soul/models/preference.dart';
 import 'package:lone_soul/screens/home_screen_portion.dart';
 import 'package:lone_soul/screens/messages_screen.dart';
+import 'package:lone_soul/screens/preference_screen.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (c) => PreferenceScreen()));
+            },
             icon: const Icon(Icons.search, size: 30),
             color: AppColors.darkGrey,
           ),

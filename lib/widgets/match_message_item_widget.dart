@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/match.dart';
 
 class MatchMessageItemWidget extends StatelessWidget {
-  final String name;
-  final String image;
+  final MatchUser user;
   final VoidCallback onTap;
   const MatchMessageItemWidget({
     super.key,
-    required this.name,
-    required this.image,
+    required this.user,
     required this.onTap,
   });
 
@@ -28,17 +27,22 @@ class MatchMessageItemWidget extends StatelessWidget {
               height: 150,
               child: AspectRatio(
                 aspectRatio: 3 / 4,
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
+                child: user.match?.imageUrl != null
+                    ? Image.network(
+                        user.match!.imageUrl!,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        'assets/images/p2.jpeg',
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             const SizedBox(height: 3),
             SizedBox(
               width: 100,
               child: Text(
-                name,
+                user.match?.username ?? '',
                 style: AppStyles.text.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,

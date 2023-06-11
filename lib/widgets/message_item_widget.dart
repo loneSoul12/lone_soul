@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/user.dart';
 
 class MessageItemWidget extends StatelessWidget {
-  final String image;
-  final String name;
-  final String message;
+  final AppUser user;
   final VoidCallback onTap;
   const MessageItemWidget({
     super.key,
-    required this.image,
-    required this.name,
-    required this.message,
+    required this.user,
     required this.onTap,
   });
 
@@ -24,8 +21,17 @@ class MessageItemWidget extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              foregroundImage: AssetImage(image),
               radius: 40,
+              child: user.imageUrl != null
+                  ? ClipOval(
+                      child: Image.network(
+                        user.imageUrl!,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : ClipOval(
+                      child: Image.asset('assets/images/p2.jpeg'),
+                    ),
             ),
             const SizedBox(width: 15),
             Expanded(
@@ -37,7 +43,7 @@ class MessageItemWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      name,
+                      user.username ?? '',
                       style: AppStyles.text.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -50,7 +56,7 @@ class MessageItemWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      message,
+                      'Say Hi to ${user.username ?? ''}',
                       style: AppStyles.text.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
