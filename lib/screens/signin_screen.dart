@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/screens/home_screen.dart';
+import 'package:lone_soul/services/auth/user_auth_methods.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -34,6 +36,23 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColors.darkGrey,
+            )),
+      ),
       body: Form(
         key: signInGlobalKey,
         child: Column(
@@ -119,14 +138,19 @@ class _SigninScreenState extends State<SigninScreen> {
             ),
             Center(
               child: InkWell(
-                onTap: () {
+                onTap: () async {
                   if (signInGlobalKey.currentState!.validate()) {
                     setState(() {
                       isLoading = true;
                     });
 
                     //sign in
+                    final sev = UserAuthentication();
+                    await sev.signInWithEmailAndPassword(
+                        emailSignField!.text, passwordSignField!.text);
                   }
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen()));
                 },
                 child: Container(
                   height: 55,

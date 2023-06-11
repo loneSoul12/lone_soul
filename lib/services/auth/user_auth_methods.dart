@@ -22,8 +22,10 @@ class UserAuthentication {
   }
 
   Future<String?> signUpEmailAndPassword(AppUser appuser) async {
-    final response = await supabaseInstance.client.auth
-        .signUp(email: appuser.email, password: appuser.password!);
+    final response = await supabaseInstance.client.auth.signUp(
+      email: appuser.email,
+      password: appuser.password!,
+    );
 
     final userId = response.user?.id;
     if (userId == null) {

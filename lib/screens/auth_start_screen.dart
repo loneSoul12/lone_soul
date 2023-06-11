@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/screens/email_screen.dart';
+import 'package:lone_soul/screens/signin_screen.dart';
 
 class AuthStartScreen extends StatelessWidget {
   const AuthStartScreen({super.key});
@@ -38,6 +40,8 @@ class AuthStartScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         //NextScreen emailScreen
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const EmailScreen()));
                       },
                       child: Container(
                         height: 55,
@@ -59,6 +63,8 @@ class AuthStartScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         //next screen sign in screen
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SigninScreen()));
                       },
                       child: Container(
                         height: 55,

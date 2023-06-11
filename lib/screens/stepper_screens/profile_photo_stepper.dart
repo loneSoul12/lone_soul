@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
 import 'package:lone_soul/models/user.dart';
+import 'package:lone_soul/screens/preference_screen.dart';
 import 'package:lone_soul/services/db/user_db_methods.dart';
 import 'package:lone_soul/utils/pick_image.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -206,6 +207,8 @@ class _ProfilePhotoStepperState extends State<ProfilePhotoStepper> {
               isLoading = true;
               setState(() {});
               await db.insertUser(widget.user!, photo!);
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => PreferenceScreen()));
             }
           },
           child: Container(

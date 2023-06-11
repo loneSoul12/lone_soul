@@ -65,6 +65,7 @@ class _GenderStepperState extends State<GenderStepper> {
             child: InkWell(
           onTap: () {
             gender = 'woman';
+            widget.user?.gender = gender;
             setState(() {});
           },
           child: Container(
