@@ -1,3 +1,4 @@
+import 'package:lone_soul/global_user.dart';
 import 'package:lone_soul/models/user.dart';
 import 'package:lone_soul/services/db/user_db_methods.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -17,7 +18,8 @@ class UserAuthentication {
     }
 
     //use "userId" to query db and get user then return this user
-    final appUser = userDB.getUser(userId);
+    final appUser = await userDB.getUser(userId);
+    globalUser = appUser;
     return appUser;
   }
 

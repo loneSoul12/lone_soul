@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/models/preference.dart';
 import 'package:lone_soul/screens/home_screen_portion.dart';
+import 'package:lone_soul/screens/messages_screen.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+
+  Preference? preference;
+
+  List<Widget> get pages => [
+        HomeScreenPortion(preference: preference),
+        const MessagesScreen(),
+      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: const HomeScreenPortion(),
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {

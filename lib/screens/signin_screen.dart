@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lone_soul/app_colors.dart';
 import 'package:lone_soul/app_styles.dart';
+import 'package:lone_soul/screens/home_screen.dart';
+import 'package:lone_soul/services/auth/user_auth_methods.dart';
 import 'package:lone_soul/utils/text_field_controller.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
   bool isLoading = false;
+  bool obscureText = true;
 
   @override
   void initState() {
@@ -98,7 +101,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     return 'Please Enter your password';
                   }
                 },
-                obscureText: true,
+                obscureText: obscureText,
                 cursorColor: AppColors.brown,
                 decoration: InputDecoration(
                     hintText: 'Enter your password',
@@ -107,9 +110,13 @@ class _SigninScreenState extends State<SigninScreen> {
                     label: const Text("Password"),
                     labelStyle: AppStyles.text.copyWith(color: AppColors.brown),
                     suffix: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.visibility_off,
+                        onPressed: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        icon: Icon(
+                          obscureText ? Icons.visibility_off : Icons.visibility,
                           color: AppColors.grey,
                         ))),
               ),
@@ -119,13 +126,29 @@ class _SigninScreenState extends State<SigninScreen> {
             ),
             Center(
               child: InkWell(
-                onTap: () {
+                onTap: () async {
                   if (signInGlobalKey.currentState!.validate()) {
                     setState(() {
                       isLoading = true;
                     });
+                    final navigator = Navigator.of(context);
 
                     //sign in
+                    final user =
+                        await UserAuthentication().signInWithEmailAndPassword(
+                      emailSignField!.text,
+                      passwordSignField!.text,
+                    );
+
+                    setState(() {
+                      isLoading = false;
+                    });
+                    if (user != null) {
+                      navigator
+                        ..popUntil((route) => false)
+                        ..push(MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
+                    }
                   }
                 },
                 child: Container(

@@ -21,7 +21,7 @@ class AppUser {
   String? gender;
   String? location;
   int? age;
-  final String? imageUrl;
+  String? imageUrl;
   List<Interest>? interests;
   Preference? preference;
 

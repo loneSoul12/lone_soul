@@ -59,7 +59,7 @@ class UserDBMethods {
       final preferenceInterest1Map = await supabaseInstance.client
           .from('interests')
           .select<List<Map<String, dynamic>>>()
-          .in_('id', preferenceMap?['interests_preference']);
+          .in_('id', preferenceMap?['interests_preference'] ?? []);
 
       final preferenceInterestList =
           preferenceInterest1Map.map((e) => Interest.fromJson(e)).toList();
