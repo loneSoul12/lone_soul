@@ -30,7 +30,6 @@ class _MainStepperState extends State<MainStepper> {
           changeStepper();
         },
       ),
-
       AgeStepper(changeStepper: () {
         changeStepper();
       }),
@@ -50,31 +49,30 @@ class _MainStepperState extends State<MainStepper> {
         },
       ),
       ProfilePhotoStepper()
-
     ];
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 35,
-            ),
-            LinearProgressIndicator(
-              value: (value / 6),
-              backgroundColor: AppColors.grey,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.pink),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-
-            stepperScreens[value - 1],
-
-          ],
+      body: SafeArea(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // const SizedBox(
+              //   height: 35,
+              // ),
+              LinearProgressIndicator(
+                value: (value / 6),
+                backgroundColor: AppColors.grey,
+                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.pink),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              stepperScreens[value - 1],
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,9 @@ class Interest {
 
   factory Interest.fromJson(Map<String, dynamic> interest) {
     return Interest(
-        id: interest[''], interestName: interest[''], isSelected: false);
+      id: interest[''],
+      interestName: interest[''],
+      isSelected: false,
+    );
   }
 }

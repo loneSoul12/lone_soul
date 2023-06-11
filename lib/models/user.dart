@@ -1,15 +1,16 @@
 class AppUser {
-  const AppUser(
-      {this.userId,
-      this.age,
-      this.email,
-      this.gender,
-      this.imageUrl,
-      this.interests,
-      this.location,
-      this.password,
-      this.username});
-  final int? userId;
+  const AppUser({
+    this.userId,
+    this.age,
+    this.email,
+    this.gender,
+    this.imageUrl,
+    this.interests,
+    this.location,
+    this.password,
+    this.username,
+  });
+  final String? userId;
   final String? username;
   final String? email;
   final String? password;
