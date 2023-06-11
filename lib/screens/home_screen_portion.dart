@@ -29,12 +29,13 @@ class _HomeScreenPortionState extends State<HomeScreenPortion> {
 
     final matchess = await MatchDBMethods().searchForMatches(
       globalUser!.userId ?? '',
-      Preference(
-        gender: 'man',
-        maxAge: 25,
-        minAge: 18,
-        userId: globalUser!.userId,
-      ),
+      widget.preference ??
+          Preference(
+            gender: 'man',
+            maxAge: 25,
+            minAge: 18,
+            userId: globalUser!.userId,
+          ),
     );
 
     setState(() {
